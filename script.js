@@ -48,7 +48,7 @@ async function sendDataToGoogleSheets(data) {
 }
 
 // --- LÓGICA DE MERCADO PAGO ---
-const mp = new MercadoPago('TU_PUBLIC_KEY', { locale: 'es-CL' });
+const mp = new MercadoPago('APP_USR-c42e4b7c-df24-4197-a39d-1eff0afed906', { locale: 'es-CL' });
 
 async function initializeMercadoPagoCheckout() {
     const loadingElement = document.getElementById('loading-payment');
