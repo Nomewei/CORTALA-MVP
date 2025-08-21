@@ -53,7 +53,7 @@ function showPage(pageId) {
  */
 async function sendDataToGoogleSheets(data) {
     // IMPORTANTE: Reemplaza esta URL con la URL de tu Web App de Google Apps Script.
-    const googleSheetsUrl = 'URL_DE_TU_GOOGLE_APPS_SCRIPT_AQUI';
+    const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycby02mubtx8uqOM2fwik8NM5zj0fAXsnGG3AxRdC084e4lc-8DUP8facmO0yxE-Lx0AThQ/exec';
 
     if (googleSheetsUrl === 'URL_DE_TU_GOOGLE_APPS_SCRIPT_AQUI') {
         console.warn('ADVERTENCIA: Debes configurar la URL de Google Apps Script para que el formulario funcione.');
