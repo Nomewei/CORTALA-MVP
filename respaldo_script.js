@@ -13,6 +13,7 @@ const backToFormBtn = document.getElementById('back-to-form');
 const backButtons = document.querySelectorAll('.back-button');
 const faqLink = document.getElementById('faq-link');
 const testimonialsLink = document.getElementById('testimonials-link');
+const contactLink = document.getElementById('contact-link'); // <-- Nuevo elemento
 
 // Formularios
 const customerForm = document.getElementById('customer-form');
@@ -53,7 +54,7 @@ function showPage(pageId) {
  */
 async function sendDataToGoogleSheets(data) {
     // IMPORTANTE: Reemplaza esta URL con la URL de tu Web App de Google Apps Script.
-    const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycby02mubtx8uqOM2fwik8NM5zj0fAXsnGG3AxRdC084e4lc-8DUP8facmO0yxE-Lx0AThQ/exec';
+    const googleSheetsUrl = 'URL_DE_TU_GOOGLE_APPS_SCRIPT_AQUI';
 
     if (googleSheetsUrl === 'URL_DE_TU_GOOGLE_APPS_SCRIPT_AQUI') {
         console.warn('ADVERTENCIA: Debes configurar la URL de Google Apps Script para que el formulario funcione.');
@@ -188,6 +189,14 @@ if (testimonialsLink) {
     });
 }
 
+// <-- Nuevo Event Listener para Contacto -->
+if (contactLink) {
+    contactLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage('contact-page');
+    });
+}
+
 // Formulario
 if (customerForm) {
     customerForm.addEventListener('submit', async (e) => {
@@ -212,4 +221,3 @@ if (customerForm) {
 // --- INICIALIZACIÓN ---
 // Revisa el estado del pago al cargar la página por primera vez.
 checkPaymentStatus();
-
