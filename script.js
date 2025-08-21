@@ -31,7 +31,7 @@ function showPage(pageId) {
 
 async function sendDataToGoogleSheets(data) {
     const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec';
-    if (googleSheetsUrl === 'URL_DE_TU_GOOGLE_APPS_SCRIPT_AQUI') {
+    if (googleSheetsUrl === 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec') {
         console.warn('ADVERTENCIA: Debes configurar la URL de Google Apps Script.');
     }
     try {
