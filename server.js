@@ -38,9 +38,9 @@ app.post('/create_preference', async (req, res) => {
         ],
         // URLs a las que Mercado Pago redirigirá al usuario después del pago.
         back_urls: {
-            success: "https://cortala-mvp.onrender.com", // Ej: https://cortala-cl.onrender.com
-            failure: "URL_DE_TU_SITIO_EN_RENDER",
-            pending: "URL_DE_TU_SITIO_EN_RENDER"
+            success: "https://cortala-mvp.onrender.com",
+            failure: "https://cortala-mvp.onrender.com",
+            pending: "https://cortala-mvp.onrender.com"
         },
         auto_return: "approved", // Regresa automáticamente al sitio si el pago es aprobado.
       },
