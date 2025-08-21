@@ -1,1 +1,34 @@
+/* Estilos personalizados y configuración de Tailwind */
+body {
+    font-family: 'Inter', sans-serif;
+}
 
+.main-container {
+    background-color: #000;
+    max-width: 420px; /* Ancho máximo en escritorio */
+    min-height: 800px; /* Altura mínima en escritorio */
+    border-radius: 30px;
+    border: 10px solid #1f2937;
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    position: relative; /* Necesario para el posicionamiento del menú */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Color de fondo degradado para el cuerpo principal */
+.gradient-bg {
+    background: linear-gradient(180deg, #0A2A64 0%, #001F5A 100%);
+}
+
+/* Media Query para optimización en dispositivos móviles */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+    .main-container {
+        max-width: 100%;
+        min-height: 100vh; /* Ocupa toda la altura de la pantalla */
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+}
