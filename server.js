@@ -26,23 +26,26 @@ app.post('/create_preference', async (req, res) => {
     const { title, quantity, unit_price } = req.body;
 
     const preference = new Preference(client);
-    // --- CORRECCIÓN: Se elimina la capa extra "body" ---
+    
+    // --- CORRECCIÓN FINAL: Se restaura el objeto "body" que envuelve toda la preferencia ---
     const result = await preference.create({
-      items: [
-        {
-          title: title,
-          quantity: Number(quantity),
-          unit_price: Number(unit_price),
-          currency_id: 'CLP',
+      body: {
+        items: [
+          {
+            title: title,
+            quantity: Number(quantity),
+            unit_price: Number(unit_price),
+            currency_id: 'CLP',
+          },
+        ],
+        // Las URLs de redirección también deben estar dentro del objeto "body".
+        back_urls: {
+            success: "https://cortala-mvp.onrender.com",
+            failure: "https://cortala-mvp.onrender.com",
+            pending: "https://cortala-mvp.onrender.com"
         },
-      ],
-      // URLs a las que Mercado Pago redirigirá al usuario después del pago.
-      back_urls: {
-          success: "https://cortala-mvp.onrender.com",
-          failure: "https://cortala-mvp.onrender.com",
-          pending: "https://cortala-mvp.onrender.com"
-      },
-      auto_return: "approved", // Regresa automáticamente al sitio si el pago es aprobado.
+        auto_return: "approved", // Regresa automáticamente al sitio si el pago es aprobado.
+      }
     });
 
     console.log('Preferencia creada:', result.id);
