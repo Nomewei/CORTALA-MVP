@@ -30,7 +30,7 @@ function showPage(pageId) {
 }
 
 async function sendDataToGoogleSheets(data) {
-    const googleSheetsUrl = 'URL_DE_TU_GOOGLE_APPS_SCRIPT_AQUI';
+    const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec';
     if (googleSheetsUrl === 'URL_DE_TU_GOOGLE_APPS_SCRIPT_AQUI') {
         console.warn('ADVERTENCIA: Debes configurar la URL de Google Apps Script.');
     }
@@ -80,7 +80,7 @@ async function initializeMercadoPagoCheckout() {
 async function createPaymentPreference() {
     try {
         // IMPORTANTE: Reemplaza esta URL con la URL de tu backend en Render.
-        const backendUrl = 'URL_DE_TU_BACKEND_EN_RENDER_AQUI/create_preference';
+        const backendUrl = 'https://cortala-mvp-4kgg.onrender.com/create_preference';
         
         const response = await fetch(backendUrl, {
             method: 'POST',
