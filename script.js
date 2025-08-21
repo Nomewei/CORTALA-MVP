@@ -9,7 +9,11 @@ const backButtons = document.querySelectorAll('.back-button');
 const faqLink = document.getElementById('faq-link');
 const testimonialsLink = document.getElementById('testimonials-link');
 const contactLink = document.getElementById('contact-link');
+const termsLink = document.getElementById('terms-link'); // <-- T&C del menú
+const termsLinkFromForm = document.getElementById('terms-link-from-form'); // <-- T&C del formulario
 const customerForm = document.getElementById('customer-form');
+const termsCheckbox = document.getElementById('terms'); // <-- Checkbox
+const termsError = document.getElementById('terms-error'); // <-- Mensaje de error
 
 // --- FUNCIONES ---
 
@@ -30,8 +34,8 @@ function showPage(pageId) {
 }
 
 async function sendDataToGoogleSheets(data) {
-    const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec';
-    if (googleSheetsUrl === 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec') {
+    const googleSheetsUrl = 'URL_DE_TU_GOOGLE_APPS_SCRIPT_AQUI';
+    if (googleSheetsUrl === 'URL_DE_TU_GOOGLE_APPS_SCRIPT_AQUI') {
         console.warn('ADVERTENCIA: Debes configurar la URL de Google Apps Script.');
     }
     try {
@@ -48,7 +52,7 @@ async function sendDataToGoogleSheets(data) {
 }
 
 // --- LÓGICA DE MERCADO PAGO ---
-const mp = new MercadoPago('APP_USR-c42e4b7c-df24-4197-a39d-1eff0afed906', { locale: 'es-CL' });
+const mp = new MercadoPago('TU_PUBLIC_KEY', { locale: 'es-CL' });
 
 async function initializeMercadoPagoCheckout() {
     const loadingElement = document.getElementById('loading-payment');
@@ -56,10 +60,8 @@ async function initializeMercadoPagoCheckout() {
     walletContainer.innerHTML = '';
     loadingElement.classList.remove('hidden');
     try {
-        // --- CAMBIO CLAVE: AHORA LLAMAMOS AL BACKEND ---
         const preferenceId = await createPaymentPreference();
-        if (!preferenceId) throw new Error('No se pudo obtener el ID de preferencia desde el backend.');
-        
+        if (!preferenceId) throw new Error('No se pudo obtener el ID de preferencia.');
         mp.bricks().create("wallet", "wallet_container", {
             initialization: { preferenceId: preferenceId },
             callbacks: {
@@ -76,31 +78,21 @@ async function initializeMercadoPagoCheckout() {
     }
 }
 
-// --- ESTA FUNCIÓN AHORA LLAMA A TU SERVIDOR ---
 async function createPaymentPreference() {
     try {
-        // IMPORTANTE: Reemplaza esta URL con la URL de tu backend en Render.
-        const backendUrl = 'https://cortala-mvp-4kgg.onrender.com/create_preference';
-        
+        const backendUrl = 'URL_DE_TU_BACKEND_EN_RENDER_AQUI/create_preference';
         const response = await fetch(backendUrl, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 title: 'Servicio de Privacidad Cortala.cl',
                 quantity: 1,
                 unit_price: 14990
             })
         });
-
-        if (!response.ok) {
-            throw new Error('La respuesta del servidor no fue exitosa');
-        }
-
+        if (!response.ok) throw new Error('La respuesta del servidor no fue exitosa');
         const preference = await response.json();
         return preference.id;
-
     } catch (error) {
         console.error("Error al crear la preferencia de pago:", error);
         return null;
@@ -126,10 +118,21 @@ if (backButtons) backButtons.forEach(button => button.addEventListener('click', 
 if (faqLink) faqLink.addEventListener('click', (e) => { e.preventDefault(); showPage('faq-page'); });
 if (testimonialsLink) testimonialsLink.addEventListener('click', (e) => { e.preventDefault(); showPage('testimonials-page'); });
 if (contactLink) contactLink.addEventListener('click', (e) => { e.preventDefault(); showPage('contact-page'); });
+if (termsLink) termsLink.addEventListener('click', (e) => { e.preventDefault(); showPage('terms-page'); });
+if (termsLinkFromForm) termsLinkFromForm.addEventListener('click', (e) => { e.preventDefault(); showPage('terms-page'); });
 
 if (customerForm) {
     customerForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        // --- VALIDACIÓN DEL CHECKBOX ---
+        if (!termsCheckbox.checked) {
+            termsError.classList.remove('hidden');
+            return; // Detiene el envío del formulario
+        } else {
+            termsError.classList.add('hidden');
+        }
+
         const formData = new FormData(customerForm);
         const customerData = {
             name: formData.get('name'),
