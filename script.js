@@ -32,7 +32,7 @@ function showPage(pageId) {
 async function sendDataToGoogleSheets(data) {
     const googleSheetsUrl = 'URL_DE_TU_GOOGLE_APPS_SCRIPT_AQUI';
     if (googleSheetsUrl === 'URL_DE_TU_GOOGLE_APPS_SCRIPT_AQUI') {
-        console.warn('ADVERTENCIA: Debes configurar la URL de Google Apps Script para que el formulario funcione.');
+        console.warn('ADVERTENCIA: Debes configurar la URL de Google Apps Script.');
     }
     try {
         await fetch(googleSheetsUrl, {
@@ -41,7 +41,7 @@ async function sendDataToGoogleSheets(data) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
-        console.log('Datos enviados a Google Sheets correctamente.');
+        console.log('Datos enviados a Google Sheets.');
     } catch (error) {
         console.error('Error al enviar datos a Google Sheets:', error);
     }
@@ -56,8 +56,10 @@ async function initializeMercadoPagoCheckout() {
     walletContainer.innerHTML = '';
     loadingElement.classList.remove('hidden');
     try {
+        // --- CAMBIO CLAVE: AHORA LLAMAMOS AL BACKEND ---
         const preferenceId = await createPaymentPreference();
-        if (!preferenceId) throw new Error('No se pudo obtener el ID de preferencia.');
+        if (!preferenceId) throw new Error('No se pudo obtener el ID de preferencia desde el backend.');
+        
         mp.bricks().create("wallet", "wallet_container", {
             initialization: { preferenceId: preferenceId },
             callbacks: {
@@ -74,9 +76,35 @@ async function initializeMercadoPagoCheckout() {
     }
 }
 
+// --- ESTA FUNCIÓN AHORA LLAMA A TU SERVIDOR ---
 async function createPaymentPreference() {
-    console.log("Creando preferencia de pago (simulado)...");
-    return "20596395-f6e1e359-5254-4a5d-a486-5f11bd39b935"; 
+    try {
+        // IMPORTANTE: Reemplaza esta URL con la URL de tu backend en Render.
+        const backendUrl = 'URL_DE_TU_BACKEND_EN_RENDER_AQUI/create_preference';
+        
+        const response = await fetch(backendUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: 'Servicio de Privacidad Cortala.cl',
+                quantity: 1,
+                unit_price: 14990
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('La respuesta del servidor no fue exitosa');
+        }
+
+        const preference = await response.json();
+        return preference.id;
+
+    } catch (error) {
+        console.error("Error al crear la preferencia de pago:", error);
+        return null;
+    }
 }
 
 function checkPaymentStatus() {
@@ -89,53 +117,16 @@ function checkPaymentStatus() {
 }
 
 // --- EVENT LISTENERS ---
-if (menuButton) {
-    menuButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        mobileMenu.classList.remove('hidden');
-    });
-}
-if (closeMenuButton) {
-    closeMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-    });
-}
-if (mobileMenu) {
-    mobileMenu.addEventListener('click', (e) => {
-        if (e.target === mobileMenu) {
-            mobileMenu.classList.add('hidden');
-        }
-    });
-}
-if (startButton) {
-    startButton.addEventListener('click', () => showPage('form-page'));
-}
-if (backToFormBtn) {
-    backToFormBtn.addEventListener('click', () => showPage('form-page'));
-}
-if (backButtons) {
-    backButtons.forEach(button => {
-        button.addEventListener('click', () => showPage('landing-page'));
-    });
-}
-if (faqLink) {
-    faqLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        showPage('faq-page');
-    });
-}
-if (testimonialsLink) {
-    testimonialsLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        showPage('testimonials-page');
-    });
-}
-if (contactLink) {
-    contactLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        showPage('contact-page');
-    });
-}
+if (menuButton) menuButton.addEventListener('click', (e) => { e.stopPropagation(); mobileMenu.classList.remove('hidden'); });
+if (closeMenuButton) closeMenuButton.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+if (mobileMenu) mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) mobileMenu.classList.add('hidden'); });
+if (startButton) startButton.addEventListener('click', () => showPage('form-page'));
+if (backToFormBtn) backToFormBtn.addEventListener('click', () => showPage('form-page'));
+if (backButtons) backButtons.forEach(button => button.addEventListener('click', () => showPage('landing-page')));
+if (faqLink) faqLink.addEventListener('click', (e) => { e.preventDefault(); showPage('faq-page'); });
+if (testimonialsLink) testimonialsLink.addEventListener('click', (e) => { e.preventDefault(); showPage('testimonials-page'); });
+if (contactLink) contactLink.addEventListener('click', (e) => { e.preventDefault(); showPage('contact-page'); });
+
 if (customerForm) {
     customerForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -146,10 +137,8 @@ if (customerForm) {
             phone: formData.get('phone'),
             code: formData.get('code'),
             timestamp: new Date().toISOString(),
-            // --- NUEVO DATO AÑADIDO ---
             saleValue: '14990' 
         };
-        console.log('Datos del cliente:', customerData);
         await sendDataToGoogleSheets(customerData);
         showPage('payment-page');
         initializeMercadoPagoCheckout();
