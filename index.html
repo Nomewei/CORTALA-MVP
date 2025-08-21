@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cortala.cl - Garantizamos la Privacidad de tus Datos</title>
+    <title>Cortala.cl - Recupera tu Privacidad</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -20,13 +20,13 @@
     <!-- Hoja de Estilos Personalizada -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-800 flex items-center justify-center min-h-screen p-4">
+<body class="bg-gray-800 flex items-center justify-center min-h-screen">
 
-    <!-- Contenedor principal que simula un teléfono móvil -->
-    <div class="main-container w-full h-full overflow-hidden flex flex-col">
+    <!-- Contenedor principal -->
+    <div id="app-container" class="main-container w-full h-full overflow-hidden flex flex-col">
 
         <!-- ===== SECCIÓN 1: PÁGINA DE INICIO (LANDING PAGE) ===== -->
-        <div id="landing-page" class="flex flex-col h-full">
+        <div id="landing-page" class="page flex flex-col h-full">
             <!-- Header -->
             <header class="p-6 flex justify-between items-center">
                 <h1 class="text-white text-2xl font-black tracking-wider">CORTALA.CL</h1>
@@ -44,18 +44,18 @@
                         <p class="text-lg font-semibold text-orange-400">Ahorra 25% con el código</p>
                         <p class="text-xl font-bold text-orange-400 tracking-wider">CORTAHOY</p>
                     </div>
-                    <h2 class="text-4xl font-extrabold mb-8 text-center leading-tight">Garantizamos la Privacidad de tus Datos Personales</h2>
+                    <h2 class="text-3xl md:text-4xl font-extrabold mb-8 text-center leading-tight">Elimina el SPAM comercial de +150 empresas y recupera tu privacidad</h2>
                     <ul class="space-y-6 text-lg mb-10 flex-grow">
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-4 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-4 text-blue-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
                             <span>Retoma el control de tus datos personales.</span>
                         </li>
                         <li class="flex items-center">
-                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-4 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-4 text-blue-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                             <span>Elimina anuncios publicitarios de +150 empresas.</span>
                         </li>
                         <li class="flex items-center">
-                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-4 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-9.998 12.078 12.078 0 01.665-6.479L12 14z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-9.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20" /></svg>
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-4 text-blue-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-9.998 12.078 12.078 0 01.665-6.479L12 14z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-9.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20" /></svg>
                             <span>Reduce el SPAM, Acoso y Estafas telefónicas.</span>
                         </li>
                     </ul>
@@ -71,9 +71,9 @@
         </div>
 
         <!-- ===== SECCIÓN 2: FORMULARIO DE CLIENTE ===== -->
-        <div id="form-page" class="hidden flex-col h-full bg-gray-100 p-6">
+        <div id="form-page" class="page hidden flex-col h-full bg-gray-100 p-6">
             <header class="flex items-center mb-8">
-                 <button id="back-to-landing" class="mr-4 p-2 rounded-full hover:bg-gray-200">
+                 <button class="back-button mr-4 p-2 rounded-full hover:bg-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
@@ -108,7 +108,7 @@
         </div>
 
         <!-- ===== SECCIÓN 3: PÁGINA DE PAGO ===== -->
-        <div id="payment-page" class="hidden flex-col h-full bg-gray-100 p-6">
+        <div id="payment-page" class="page hidden flex-col h-full bg-gray-100 p-6">
             <header class="flex items-center mb-8">
                  <button id="back-to-form" class="mr-4 p-2 rounded-full hover:bg-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -148,7 +148,7 @@
         </div>
         
         <!-- ===== SECCIÓN 4: PÁGINA DE ÉXITO ===== -->
-        <div id="success-page" class="hidden flex-col h-full bg-green-50 p-6 text-center justify-center items-center">
+        <div id="success-page" class="page hidden flex-col h-full bg-green-50 p-6 text-center justify-center items-center">
             <div class="bg-white p-8 rounded-full shadow-lg mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-green-500" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
@@ -158,19 +158,77 @@
             <p class="text-gray-600 text-lg">Gracias por tu compra. Hemos recibido tus datos y activaremos tu servicio a la brevedad. Recibirás un correo de confirmación.</p>
         </div>
 
-        <!-- ===== MENÚ DE NAVEGACIÓN ===== -->
-        <div id="mobile-menu" class="hidden absolute top-0 right-0 w-64 h-auto bg-gray-800 bg-opacity-95 rounded-bl-lg p-6 shadow-lg">
-            <div class="flex justify-end mb-4">
-                <button id="close-menu-button">
-                    <i class="gg-close text-white"></i>
+        <!-- ===== SECCIÓN 5: PREGUNTAS FRECUENTES ===== -->
+        <div id="faq-page" class="page hidden flex-col h-full bg-gray-100 p-6">
+            <header class="flex items-center mb-8">
+                 <button class="back-button mr-4 p-2 rounded-full hover:bg-gray-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
                 </button>
+                <h2 class="text-2xl font-bold text-gray-800">Preguntas Frecuentes</h2>
+            </header>
+            <main class="flex-grow overflow-y-auto">
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-bold text-gray-800">¿Cómo funciona el servicio?</h3>
+                        <p class="text-gray-600 mt-2">Nosotros nos contactamos en tu nombre con más de 150 empresas en Chile que suelen tener tus datos para fines comerciales. Solicitamos formalmente que eliminen tu información de sus bases de datos de marketing, reduciendo drásticamente el SPAM y las llamadas no deseadas.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-bold text-gray-800">¿Es legal este proceso?</h3>
+                        <p class="text-gray-600 mt-2">Sí, es 100% legal. Nos amparamos en la Ley N° 19.628 sobre Protección de la Vida Privada, que te da derecho a solicitar la eliminación de tus datos personales para fines publicitarios.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-bold text-gray-800">¿Cuánto tiempo tarda en hacer efecto?</h3>
+                        <p class="text-gray-600 mt-2">El proceso de contacto con las empresas comienza de inmediato. Sin embargo, algunas empresas pueden tardar hasta 15 días hábiles en procesar la solicitud. Verás una reducción significativa de SPAM en las primeras semanas.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- ===== SECCIÓN 6: TESTIMONIOS ===== -->
+        <div id="testimonials-page" class="page hidden flex-col h-full bg-gray-100 p-6">
+            <header class="flex items-center mb-8">
+                 <button class="back-button mr-4 p-2 rounded-full hover:bg-gray-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <h2 class="text-2xl font-bold text-gray-800">Testimonios</h2>
+            </header>
+            <main class="flex-grow overflow-y-auto">
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-lg shadow text-center">
+                        <p class="text-gray-700 italic">"¡Increíble! Pensé que era imposible dejar de recibir llamadas de empresas de telefonía todos los días. Ahora mi teléfono está en paz. ¡Totalmente recomendado!"</p>
+                        <p class="font-bold text-blue-800 mt-4">- Javiera L., Santiago</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow text-center">
+                        <p class="text-gray-700 italic">"El servicio es un 7. Se nota al tiro la diferencia, sobre todo en la cantidad de correos basura que me llegaban. Vale cada peso."</p>
+                        <p class="font-bold text-blue-800 mt-4">- Matías R., Viña del Mar</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow text-center">
+                        <p class="text-gray-700 italic">"Contraté el servicio por las estafas telefónicas, y me ha dado mucha más tranquilidad. Un servicio que de verdad se necesita en Chile."</p>
+                        <p class="font-bold text-blue-800 mt-4">- Carolina S., Concepción</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- ===== MENÚ DE NAVEGACIÓN ===== -->
+        <div id="mobile-menu" class="hidden absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10">
+            <div class="absolute top-0 right-0 w-64 h-full bg-gray-800 p-6 shadow-lg">
+                <div class="flex justify-end mb-8">
+                    <button id="close-menu-button">
+                        <i class="gg-close text-white scale-125"></i>
+                    </button>
+                </div>
+                <nav>
+                    <ul class="text-white text-xl space-y-6">
+                        <li><a href="#" id="faq-link" class="hover:text-orange-400">Preguntas Frecuentes</a></li>
+                        <li><a href="#" id="testimonials-link" class="hover:text-orange-400">Testimonios</a></li>
+                    </ul>
+                </nav>
             </div>
-            <nav>
-                <ul class="text-white text-lg space-y-4">
-                    <li><a href="#" class="hover:text-orange-400">Preguntas Frecuentes</a></li>
-                    <li><a href="#" class="hover:text-orange-400">Testimonios</a></li>
-                </ul>
-            </nav>
         </div>
 
     </div>
