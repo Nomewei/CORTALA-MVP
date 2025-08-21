@@ -38,25 +38,24 @@
             </header>
 
             <!-- Contenido Principal -->
-            <main class="flex-grow p-6 sm:p-8 text-white flex flex-col justify-center">
+            <main class="flex-grow px-6 pb-6 text-white flex flex-col justify-center">
                 <div class="gradient-bg rounded-2xl p-8 flex-grow flex flex-col shadow-lg">
-                    <div class="text-center mb-6">
-                        <p class="text-lg font-semibold text-orange-400">Ahorra 25% con el código</p>
-                        <p class="text-xl font-bold text-orange-400 tracking-wider">CORTAHOY</p>
+                    <div class="text-center mb-4">
+                        <p class="text-base font-semibold text-orange-400">Ahorra 25% con el código <span class="font-bold tracking-wider">CORTAHOY</span></p>
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-extrabold mb-8 text-center leading-tight">Elimina el SPAM comercial de +150 empresas y recupera tu privacidad</h2>
-                    <ul class="space-y-6 text-lg mb-10 flex-grow">
+                    <h2 class="text-3xl md:text-4xl font-extrabold mb-6 text-center leading-tight">Elimina el SPAM comercial de +150 empresas hoy</h2>
+                    <ul class="space-y-6 text-lg mb-8 flex-grow">
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-4 text-blue-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
-                            <span>Retoma el control de tus datos personales.</span>
+                            <span>Retoma el control de tus datos.</span>
                         </li>
                         <li class="flex items-center">
                              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-4 text-blue-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
-                            <span>Elimina anuncios publicitarios de +150 empresas.</span>
+                            <span>Elimina anuncios de +150 empresas.</span>
                         </li>
                         <li class="flex items-center">
                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-4 text-blue-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-9.998 12.078 12.078 0 01.665-6.479L12 14z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-9.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20" /></svg>
-                            <span>Reduce el SPAM, Acoso y Estafas telefónicas.</span>
+                            <span>Reduce SPAM, Acoso y Estafas.</span>
                         </li>
                     </ul>
                     <button id="start-button" class="bg-white text-blue-900 font-bold text-xl py-4 px-6 rounded-lg w-full shadow-lg hover:bg-gray-200 transition-colors duration-300">
@@ -213,6 +212,28 @@
                 </div>
             </main>
         </div>
+        
+        <!-- ===== SECCIÓN 7: CONTACTO ===== -->
+        <div id="contact-page" class="page hidden flex-col h-full bg-gray-100 p-6">
+            <header class="flex items-center mb-8">
+                 <button class="back-button mr-4 p-2 rounded-full hover:bg-gray-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <h2 class="text-2xl font-bold text-gray-800">Contacto</h2>
+            </header>
+            <main class="flex-grow flex flex-col items-center justify-center space-y-6">
+                <a href="mailto:contacto@cortala.cl" class="bg-white w-full max-w-sm text-center p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold text-gray-800">Enviar un Correo</h3>
+                    <p class="text-gray-600 mt-2">contacto@cortala.cl</p>
+                </a>
+                <a href="https://wa.me/569XXXXXXXX" target="_blank" class="bg-green-500 text-white w-full max-w-sm text-center p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold">Chatear por WhatsApp</h3>
+                    <p class="mt-2">¡Te respondemos a la brevedad!</p>
+                </a>
+            </main>
+        </div>
 
         <!-- ===== MENÚ DE NAVEGACIÓN ===== -->
         <div id="mobile-menu" class="hidden absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10">
@@ -226,6 +247,7 @@
                     <ul class="text-white text-xl space-y-6">
                         <li><a href="#" id="faq-link" class="hover:text-orange-400">Preguntas Frecuentes</a></li>
                         <li><a href="#" id="testimonials-link" class="hover:text-orange-400">Testimonios</a></li>
+                        <li><a href="#" id="contact-link" class="hover:text-orange-400">Contacto</a></li>
                     </ul>
                 </nav>
             </div>
