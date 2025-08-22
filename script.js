@@ -24,9 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const summaryExtraContainer = document.getElementById('summary-extra-container');
     const summaryTotalPrice = document.getElementById('summary-total-price');
 
-    // --- VARIABLES DE ESTADO ---
-    let finalSalePrice = 14990;
-
     // --- FUNCIONES ---
 
     function showPage(pageId) {
@@ -46,7 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function sendDataToGoogleSheets(data) {
-        const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec';
+        // IMPORTANTE: Reemplaza con la URL de tu propio Google Apps Script
+        const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec'; 
         try {
             await fetch(googleSheetsUrl, {
                 method: 'POST',
@@ -61,16 +59,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- LÓGICA DE MERCADO PAGO ---
-    // IMPORTANTE: Reemplaza 'TU_PUBLIC_KEY' con tu llave pública (empieza con APP-...)
+    // IMPORTANTE: Reemplaza con tu Public Key de Mercado Pago
     const mp = new MercadoPago('APP_USR-c42e4b7c-df24-4197-a39d-1eff0afed906', { locale: 'es-CL' });
 
-    async function initializeMercadoPagoCheckout(amount) {
+    async function initializeMercadoPagoCheckout(purchaseItems) {
         const loadingElement = document.getElementById('loading-payment');
         const walletContainer = document.getElementById('wallet_container');
         walletContainer.innerHTML = '';
         loadingElement.classList.remove('hidden');
         try {
-            const preferenceId = await createPaymentPreference(amount);
+            const preferenceId = await createPaymentPreference(purchaseItems);
             if (!preferenceId) {
                 throw new Error('No se pudo obtener el ID de preferencia.');
             }
@@ -90,17 +88,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    async function createPaymentPreference(amount) {
+    async function createPaymentPreference(items) {
         try {
-            const backendUrl = 'https://cortala-mvp-4kgg.onrender.com/create_preference';
+            // IMPORTANTE: Reemplaza con la URL de tu backend en Render
+            const backendUrl = 'https://cortala-mvp-4kgg.onrender.com';
             const response = await fetch(backendUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    title: 'Servicio de Privacidad Cortala.cl',
-                    quantity: 1,
-                    unit_price: amount
-                })
+                // AHORA ENVIAMOS LOS ITEMS, NO EL PRECIO
+                body: JSON.stringify({ items: items })
             });
             if (!response.ok) throw new Error('La respuesta del servidor no fue exitosa');
             const preference = await response.json();
@@ -120,19 +116,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Esta función solo actualiza la UI, no el precio real de la transacción.
     function updatePriceSummary() {
         const basePrice = 14990;
         const extraPrice = 4990;
         const formatCurrency = (value) => new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(value);
 
+        let displayPrice = basePrice;
         if (addExtraCheckbox.checked) {
-            finalSalePrice = basePrice + extraPrice;
+            displayPrice += extraPrice;
             summaryExtraContainer.classList.remove('hidden');
         } else {
-            finalSalePrice = basePrice;
             summaryExtraContainer.classList.add('hidden');
         }
-        summaryTotalPrice.textContent = formatCurrency(finalSalePrice);
+        summaryTotalPrice.textContent = formatCurrency(displayPrice);
     }
 
     // --- EVENT LISTENERS ---
@@ -152,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (addExtraCheckbox) {
         addExtraCheckbox.addEventListener('change', () => {
             extraFields.classList.toggle('hidden', !addExtraCheckbox.checked);
+            updatePriceSummary(); // Actualiza el resumen visual al cambiar
         });
     }
 
@@ -166,7 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 termsError.classList.add('hidden');
             }
             
-            updatePriceSummary();
+            // Preparamos los items para enviar al backend
+            const purchaseItems = ['base_service'];
+            if (addExtraCheckbox.checked) {
+                purchaseItems.push('extra_protection');
+            }
 
             const formData = new FormData(customerForm);
             const customerData = {
@@ -175,17 +177,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 phone: formData.get('phone'),
                 code: formData.get('code'),
                 timestamp: new Date().toISOString(),
-                saleValue: finalSalePrice,
                 extraEmail: formData.get('extra-email') || '',
-                extraPhone: formData.get('extra-phone') || ''
+                extraPhone: formData.get('extra-phone') || '',
+                // Guardamos qué compró para referencia
+                purchase: purchaseItems.join(', ') 
             };
             
             await sendDataToGoogleSheets(customerData);
             showPage('payment-page');
-            await initializeMercadoPagoCheckout(finalSalePrice);
+            await initializeMercadoPagoCheckout(purchaseItems);
         });
     }
 
     // --- INICIALIZACIÓN ---
     checkPaymentStatus();
+    updatePriceSummary(); // Llama una vez al inicio para establecer el precio base
 });
