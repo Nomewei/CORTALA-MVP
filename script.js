@@ -47,10 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function sendDataToGoogleSheets(data) {
         const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec';
-        if (googleSheetsUrl === 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec') {
-            console.warn('ADVERTENCIA: Debes configurar la URL de Google Apps Script.');
-            return;
-        }
         try {
             await fetch(googleSheetsUrl, {
                 method: 'POST',
@@ -65,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- LÓGICA DE MERCADO PAGO ---
+    // IMPORTANTE: Reemplaza 'TU_PUBLIC_KEY' con tu llave pública (empieza con APP-...)
     const mp = new MercadoPago('APP_USR-c42e4b7c-df24-4197-a39d-1eff0afed906', { locale: 'es-CL' });
 
     async function initializeMercadoPagoCheckout(amount) {
@@ -96,10 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
     async function createPaymentPreference(amount) {
         try {
             const backendUrl = 'https://cortala-mvp-4kgg.onrender.com/create_preference';
-            if (backendUrl.includes('https://cortala-mvp-4kgg.onrender.com/create_preference')) {
-                console.error("Error: La URL del backend no está configurada.");
-                return null;
-            }
             const response = await fetch(backendUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
