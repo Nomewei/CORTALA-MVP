@@ -17,6 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const customerForm = document.getElementById('customer-form');
     const termsCheckbox = document.getElementById('terms');
     const termsError = document.getElementById('terms-error');
+    
+    // Elementos para el Upsell (Protección Extra)
+    const addExtraCheckbox = document.getElementById('add-extra');
+    const extraFields = document.getElementById('extra-fields');
+    const summaryExtraContainer = document.getElementById('summary-extra-container');
+    const summaryTotalPrice = document.getElementById('summary-total-price');
+
+    // --- VARIABLES DE ESTADO ---
+    let finalSalePrice = 14990;
 
     // --- FUNCIONES ---
 
@@ -37,8 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function sendDataToGoogleSheets(data) {
-        // --- CORRECCIÓN 1: Se elimina la advertencia que bloqueaba el envío ---
         const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec';
+        if (googleSheetsUrl === 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec') {
+            console.warn('ADVERTENCIA: Debes configurar la URL de Google Apps Script.');
+            return;
+        }
         try {
             await fetch(googleSheetsUrl, {
                 method: 'POST',
@@ -53,16 +65,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- LÓGICA DE MERCADO PAGO ---
-    // --- CORRECCIÓN 2: Aquí debes pegar tu PUBLIC KEY (empieza con APP-...) ---
     const mp = new MercadoPago('APP_USR-c42e4b7c-df24-4197-a39d-1eff0afed906', { locale: 'es-CL' });
 
-    async function initializeMercadoPagoCheckout() {
+    async function initializeMercadoPagoCheckout(amount) {
         const loadingElement = document.getElementById('loading-payment');
         const walletContainer = document.getElementById('wallet_container');
         walletContainer.innerHTML = '';
         loadingElement.classList.remove('hidden');
         try {
-            const preferenceId = await createPaymentPreference();
+            const preferenceId = await createPaymentPreference(amount);
             if (!preferenceId) {
                 throw new Error('No se pudo obtener el ID de preferencia.');
             }
@@ -82,18 +93,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    async function createPaymentPreference() {
+    async function createPaymentPreference(amount) {
         try {
-            // --- CORRECCIÓN 3: Aquí debes pegar la URL de tu backend en Render ---
             const backendUrl = 'https://cortala-mvp-4kgg.onrender.com/create_preference';
-            
+            if (backendUrl.includes('https://cortala-mvp-4kgg.onrender.com/create_preference')) {
+                console.error("Error: La URL del backend no está configurada.");
+                return null;
+            }
             const response = await fetch(backendUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     title: 'Servicio de Privacidad Cortala.cl',
                     quantity: 1,
-                    unit_price: 14990
+                    unit_price: amount
                 })
             });
             if (!response.ok) throw new Error('La respuesta del servidor no fue exitosa');
@@ -114,6 +127,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function updatePriceSummary() {
+        const basePrice = 14990;
+        const extraPrice = 4990;
+        const formatCurrency = (value) => new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(value);
+
+        if (addExtraCheckbox.checked) {
+            finalSalePrice = basePrice + extraPrice;
+            summaryExtraContainer.classList.remove('hidden');
+        } else {
+            finalSalePrice = basePrice;
+            summaryExtraContainer.classList.add('hidden');
+        }
+        summaryTotalPrice.textContent = formatCurrency(finalSalePrice);
+    }
+
     // --- EVENT LISTENERS ---
     if (menuButton) menuButton.addEventListener('click', (e) => { e.stopPropagation(); mobileMenu.classList.remove('hidden'); });
     if (closeMenuButton) closeMenuButton.addEventListener('click', () => mobileMenu.classList.add('hidden'));
@@ -127,6 +155,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (termsLink) termsLink.addEventListener('click', (e) => { e.preventDefault(); showPage('terms-page'); });
     if (termsLinkFromForm) termsLinkFromForm.addEventListener('click', (e) => { e.preventDefault(); showPage('terms-page'); });
 
+    // Event listener para el checkbox de Protección Extra
+    if (addExtraCheckbox) {
+        addExtraCheckbox.addEventListener('change', () => {
+            extraFields.classList.toggle('hidden', !addExtraCheckbox.checked);
+        });
+    }
+
     if (customerForm) {
         customerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -137,6 +172,8 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 termsError.classList.add('hidden');
             }
+            
+            updatePriceSummary();
 
             const formData = new FormData(customerForm);
             const customerData = {
@@ -145,12 +182,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 phone: formData.get('phone'),
                 code: formData.get('code'),
                 timestamp: new Date().toISOString(),
-                saleValue: '14990' 
+                saleValue: finalSalePrice,
+                extraEmail: formData.get('extra-email') || '',
+                extraPhone: formData.get('extra-phone') || ''
             };
             
             await sendDataToGoogleSheets(customerData);
             showPage('payment-page');
-            await initializeMercadoPagoCheckout();
+            await initializeMercadoPagoCheckout(finalSalePrice);
         });
     }
 
