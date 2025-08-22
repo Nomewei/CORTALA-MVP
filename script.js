@@ -54,9 +54,9 @@ function showPage(pageId) {
  */
 async function sendDataToGoogleSheets(data) {
     // IMPORTANTE: Reemplaza esta URL con la URL de tu Web App de Google Apps Script.
-    const googleSheetsUrl = 'URL_DE_TU_GOOGLE_APPS_SCRIPT_AQUI';
+    const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec';
 
-    if (googleSheetsUrl === 'URL_DE_TU_GOOGLE_APPS_SCRIPT_AQUI') {
+    if (googleSheetsUrl === 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec') {
         console.warn('ADVERTENCIA: Debes configurar la URL de Google Apps Script para que el formulario funcione.');
     }
 
@@ -75,7 +75,7 @@ async function sendDataToGoogleSheets(data) {
 
 // --- LÓGICA DE MERCADO PAGO ---
 // IMPORTANTE: Reemplaza 'TU_PUBLIC_KEY' con tu clave pública de Mercado Pago.
-const mp = new MercadoPago('TU_PUBLIC_KEY', { locale: 'es-CL' });
+const mp = new MercadoPago('APP_USR-c42e4b7c-df24-4197-a39d-1eff0afed906', { locale: 'es-CL' });
 
 /**
  * Inicializa el checkout de Mercado Pago.
