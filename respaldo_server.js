@@ -23,28 +23,27 @@ app.get('/', (req, res) => {
 // --- RUTA PARA CREAR LA PREFERENCIA DE PAGO ---
 app.post('/create_preference', async (req, res) => {
   try {
+    // AHORA RECIBIMOS EL PRECIO TOTAL DESDE EL FRONTEND
     const { title, quantity, unit_price } = req.body;
 
     const preference = new Preference(client);
     
-    // --- CORRECCIÓN FINAL: Se restaura el objeto "body" que envuelve toda la preferencia ---
     const result = await preference.create({
       body: {
         items: [
           {
             title: title,
             quantity: Number(quantity),
-            unit_price: Number(unit_price),
+            unit_price: Number(unit_price), // Usamos el precio que llega desde el frontend
             currency_id: 'CLP',
           },
         ],
-        // Las URLs de redirección también deben estar dentro del objeto "body".
         back_urls: {
-            success: "https://cortala-mvp.onrender.com",
-            failure: "https://cortala-mvp.onrender.com",
-            pending: "https://cortala-mvp.onrender.com"
+            success: "https://www.cortala.cl", // Apuntando a tu dominio final
+            failure: "https://www.cortala.cl",
+            pending: "https://www.cortala.cl"
         },
-        auto_return: "approved", // Regresa automáticamente al sitio si el pago es aprobado.
+        auto_return: "approved",
       }
     });
 
