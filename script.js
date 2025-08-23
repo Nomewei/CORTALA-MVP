@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const summaryTotalPrice = document.getElementById('summary-total-price');
 
     // --- VARIABLES DE ESTADO ---
-    let finalSalePrice = 14990; // Se vuelve a usar el precio en el frontend
+    let finalSalePrice = 14990;
 
     // --- FUNCIONES ---
 
@@ -46,12 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function sendDataToGoogleSheets(data) {
-        // IMPORTANTE: Reemplaza con la URL de tu propio Google Apps Script
-        const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec'; 
+        const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec';
         try {
             await fetch(googleSheetsUrl, {
                 method: 'POST',
-                mode: 'no-cors', // 'no-cors' es clave para Google Scripts
+                mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
@@ -62,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- LÓGICA DE MERCADO PAGO ---
-    // IMPORTANTE: Reemplaza con tu Public Key de Mercado Pago
+    // IMPORTANTE: Reemplaza 'TU_PUBLIC_KEY' con tu llave pública (empieza con APP-...)
     const mp = new MercadoPago('APP_USR-c42e4b7c-df24-4197-a39d-1eff0afed906', { locale: 'es-CL' });
 
     async function initializeMercadoPagoCheckout(amount) {
@@ -93,15 +92,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function createPaymentPreference(amount) {
         try {
-            // IMPORTANTE: Reemplaza con la URL de tu backend en Render
-            const backendUrl = 'https://cortala-mvp-4kgg.onrender.com';
+            const backendUrl = 'https://cortala-mvp-4kgg.onrender.com/create_preference';
             const response = await fetch(backendUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     title: 'Servicio de Privacidad Cortala.cl',
                     quantity: 1,
-                    unit_price: amount // Se envía el precio calculado desde el frontend
+                    unit_price: amount
                 })
             });
             if (!response.ok) throw new Error('La respuesta del servidor no fue exitosa');
@@ -150,10 +148,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (termsLink) termsLink.addEventListener('click', (e) => { e.preventDefault(); showPage('terms-page'); });
     if (termsLinkFromForm) termsLinkFromForm.addEventListener('click', (e) => { e.preventDefault(); showPage('terms-page'); });
 
+    // Event listener para el checkbox de Protección Extra
     if (addExtraCheckbox) {
         addExtraCheckbox.addEventListener('change', () => {
             extraFields.classList.toggle('hidden', !addExtraCheckbox.checked);
-            updatePriceSummary(); 
         });
     }
 
@@ -177,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 phone: formData.get('phone'),
                 code: formData.get('code'),
                 timestamp: new Date().toISOString(),
-                saleValue: finalSalePrice, // Se guarda el precio calculado en el frontend
+                saleValue: finalSalePrice,
                 extraEmail: formData.get('extra-email') || '',
                 extraPhone: formData.get('extra-phone') || ''
             };
