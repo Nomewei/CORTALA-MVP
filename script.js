@@ -24,6 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const summaryExtraContainer = document.getElementById('summary-extra-container');
     const summaryTotalPrice = document.getElementById('summary-total-price');
 
+    // --- VARIABLES DE ESTADO ---
+    let finalSalePrice = 14990; // Se vuelve a usar el precio en el frontend
+
     // --- FUNCIONES ---
 
     function showPage(pageId) {
@@ -48,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             await fetch(googleSheetsUrl, {
                 method: 'POST',
-                mode: 'no-cors',
+                mode: 'no-cors', // 'no-cors' es clave para Google Scripts
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
@@ -62,13 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // IMPORTANTE: Reemplaza con tu Public Key de Mercado Pago
     const mp = new MercadoPago('APP_USR-c42e4b7c-df24-4197-a39d-1eff0afed906', { locale: 'es-CL' });
 
-    async function initializeMercadoPagoCheckout(purchaseItems) {
+    async function initializeMercadoPagoCheckout(amount) {
         const loadingElement = document.getElementById('loading-payment');
         const walletContainer = document.getElementById('wallet_container');
         walletContainer.innerHTML = '';
         loadingElement.classList.remove('hidden');
         try {
-            const preferenceId = await createPaymentPreference(purchaseItems);
+            const preferenceId = await createPaymentPreference(amount);
             if (!preferenceId) {
                 throw new Error('No se pudo obtener el ID de preferencia.');
             }
@@ -88,15 +91,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    async function createPaymentPreference(items) {
+    async function createPaymentPreference(amount) {
         try {
             // IMPORTANTE: Reemplaza con la URL de tu backend en Render
             const backendUrl = 'https://cortala-mvp-4kgg.onrender.com';
             const response = await fetch(backendUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                // AHORA ENVIAMOS LOS ITEMS, NO EL PRECIO
-                body: JSON.stringify({ items: items })
+                body: JSON.stringify({
+                    title: 'Servicio de Privacidad Cortala.cl',
+                    quantity: 1,
+                    unit_price: amount // Se envía el precio calculado desde el frontend
+                })
             });
             if (!response.ok) throw new Error('La respuesta del servidor no fue exitosa');
             const preference = await response.json();
@@ -116,20 +122,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Esta función solo actualiza la UI, no el precio real de la transacción.
     function updatePriceSummary() {
         const basePrice = 14990;
         const extraPrice = 4990;
         const formatCurrency = (value) => new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(value);
 
-        let displayPrice = basePrice;
         if (addExtraCheckbox.checked) {
-            displayPrice += extraPrice;
+            finalSalePrice = basePrice + extraPrice;
             summaryExtraContainer.classList.remove('hidden');
         } else {
+            finalSalePrice = basePrice;
             summaryExtraContainer.classList.add('hidden');
         }
-        summaryTotalPrice.textContent = formatCurrency(displayPrice);
+        summaryTotalPrice.textContent = formatCurrency(finalSalePrice);
     }
 
     // --- EVENT LISTENERS ---
@@ -145,11 +150,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (termsLink) termsLink.addEventListener('click', (e) => { e.preventDefault(); showPage('terms-page'); });
     if (termsLinkFromForm) termsLinkFromForm.addEventListener('click', (e) => { e.preventDefault(); showPage('terms-page'); });
 
-    // Event listener para el checkbox de Protección Extra
     if (addExtraCheckbox) {
         addExtraCheckbox.addEventListener('change', () => {
             extraFields.classList.toggle('hidden', !addExtraCheckbox.checked);
-            updatePriceSummary(); // Actualiza el resumen visual al cambiar
+            updatePriceSummary(); 
         });
     }
 
@@ -164,11 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 termsError.classList.add('hidden');
             }
             
-            // Preparamos los items para enviar al backend
-            const purchaseItems = ['base_service'];
-            if (addExtraCheckbox.checked) {
-                purchaseItems.push('extra_protection');
-            }
+            updatePriceSummary();
 
             const formData = new FormData(customerForm);
             const customerData = {
@@ -177,19 +177,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 phone: formData.get('phone'),
                 code: formData.get('code'),
                 timestamp: new Date().toISOString(),
+                saleValue: finalSalePrice, // Se guarda el precio calculado en el frontend
                 extraEmail: formData.get('extra-email') || '',
-                extraPhone: formData.get('extra-phone') || '',
-                // Guardamos qué compró para referencia
-                purchase: purchaseItems.join(', ') 
+                extraPhone: formData.get('extra-phone') || ''
             };
             
             await sendDataToGoogleSheets(customerData);
             showPage('payment-page');
-            await initializeMercadoPagoCheckout(purchaseItems);
+            await initializeMercadoPagoCheckout(finalSalePrice);
         });
     }
 
     // --- INICIALIZACIÓN ---
     checkPaymentStatus();
-    updatePriceSummary(); // Llama una vez al inicio para establecer el precio base
 });
