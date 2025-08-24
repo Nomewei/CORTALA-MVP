@@ -68,9 +68,10 @@
                             <span>Reduce hasta un 95% las Llamadas, SMS y Correos SPAM.</span>
                         </li>
                         <li class="flex items-center">
-                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-4 text-blue-300 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M10 2a6 6 0 00-6 6v3.586l-1.707 1.707A1 1 0 003 15v1a1 1 0 001 1h12a1 1 0 001-1v-1a1 1 0 00-.293-.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
-                            </svg>
+                             <!-- ICONO CAMBIADO: Reloj para "Ahorra tiempo" -->
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-4 text-blue-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                             </svg>
                             <span>Ahorra +100 horas en trámites.</span>
                         </li>
                         <li class="flex items-center">
@@ -195,14 +196,28 @@
                             </div>
                         </div>
 
-                        <!-- SECCIÓN NUEVA: PRÓXIMOS PASOS -->
-                        <div class="bg-gray-50 text-left p-4 rounded-md border border-gray-200 my-6">
-                            <h4 class="font-bold text-gray-800 mb-2">Próximos Pasos:</h4>
-                            <ul class="text-sm text-gray-600 space-y-2 list-disc list-inside">
-                                <li>Recibirás un <strong>correo de confirmación</strong> con el detalle de tu compra.</li>
-                                <li>Nuestro equipo procesará tu solicitud dentro de las <strong>próximas 24 horas hábiles</strong>.</li>
-                                <li>Comenzarás a notar una reducción del SPAM en los próximos días.</li>
-                            </ul>
+                        <!-- SECCIÓN NUEVA: PRÓXIMOS PASOS (DISEÑO MEJORADO) -->
+                        <div class="text-left my-6 space-y-6 relative border-l-2 border-blue-200 ml-3">
+                            <!-- Paso 1 -->
+                            <div class="relative pl-8">
+                                <div class="absolute -left-3 top-1 w-5 h-5 bg-blue-500 rounded-full border-4 border-white"></div>
+                                <h4 class="font-bold text-blue-800">Paso 1: Confirma tu Pago</h4>
+                                <p class="text-sm text-gray-600">Serás redirigido a Mercado Pago para completar tu compra de forma segura.</p>
+                            </div>
+                    
+                            <!-- Paso 2 -->
+                            <div class="relative pl-8">
+                                <div class="absolute -left-3 top-1 w-5 h-5 bg-blue-500 rounded-full border-4 border-white"></div>
+                                <h4 class="font-bold text-blue-800">Paso 2: Procesamos tu Solicitud</h4>
+                                <p class="text-sm text-gray-600">Nuestro equipo activará tu servicio dentro de 24 horas hábiles y recibirás un correo de confirmación.</p>
+                            </div>
+                    
+                            <!-- Paso 3 -->
+                            <div class="relative pl-8">
+                                <div class="absolute -left-3 top-1 w-5 h-5 bg-blue-500 rounded-full border-4 border-white"></div>
+                                <h4 class="font-bold text-blue-800">Paso 3: ¡Disfruta tu Tranquilidad!</h4>
+                                <p class="text-sm text-gray-600">Comenzarás a notar una drástica reducción del SPAM en los próximos días.</p>
+                            </div>
                         </div>
                         
                         <div id="wallet_container" class="flex justify-center"></div>
