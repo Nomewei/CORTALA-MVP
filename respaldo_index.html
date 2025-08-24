@@ -229,6 +229,13 @@
                         <div id="loading-payment" class="hidden text-center p-4">
                             <p>Cargando checkout...</p>
                         </div>
+                        <!-- NUEVO: MENSAJE DE SEGURIDAD BAJO EL BOTÓN DE PAGO -->
+                        <div class="flex items-center justify-center mt-4 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5.023L2.088 5.071A12.006 12.006 0 002 17.402V18a2 2 0 002 2h12a2 2 0 002-2v-.598A12.006 12.006 0 0017.912 5.07L17.834 5.023A11.954 11.954 0 0110 1.944zM8.5 12.5a1 1 0 112 0v2a1 1 0 11-2 0v-2zm0-5a1 1 0 011-1h.01a1 1 0 110 2H9.5a1 1 0 01-1-1z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-xs">Tus datos están protegidos y no serán compartidos.</span>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -324,7 +331,7 @@
             </main>
         </div>
         
-        <!-- ===== SECCIÓN 7: CONTACTO ===== -->
+        <!-- ===== SECCIÓN 7: CONTACTO (ACTUALIZADO) ===== -->
         <div id="contact-page" class="page hidden flex-col h-full bg-gray-100 p-6">
             <header class="flex items-center mb-8">
                  <button class="back-button mr-4 p-2 rounded-full hover:bg-gray-200">
@@ -334,15 +341,21 @@
                 </button>
                 <h2 class="text-2xl font-bold text-gray-800">Contacto</h2>
             </header>
-            <main class="flex-grow flex flex-col items-center justify-center space-y-6">
-                <a href="mailto:contacto@cortala.cl" class="bg-white w-full max-w-sm text-center p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-                    <h3 class="text-xl font-bold text-gray-800">Enviar un Correo</h3>
-                    <p class="text-gray-600 mt-2">contacto@cortala.cl</p>
-                </a>
-                <a href="https://wa.me/569XXXXXXXX" target="_blank" class="bg-green-500 text-white w-full max-w-sm text-center p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-                    <h3 class="text-xl font-bold">Chatear por WhatsApp</h3>
-                    <p class="mt-2">¡Te respondemos a la brevedad!</p>
-                </a>
+            <main class="flex-grow flex flex-col items-center justify-center">
+                <div class="w-full max-w-sm space-y-6">
+                    <a href="mailto:contacto@cortala.cl" class="bg-white w-full text-center p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow block">
+                        <h3 class="text-xl font-bold text-gray-800">Enviar un Correo</h3>
+                        <p class="text-gray-600 mt-2">contacto@cortala.cl</p>
+                    </a>
+                    <a href="https://wa.me/569XXXXXXXX" target="_blank" class="bg-green-500 text-white w-full text-center p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow block">
+                        <h3 class="text-xl font-bold">Chatear por WhatsApp</h3>
+                        <p class="mt-2">¡Te respondemos a la brevedad!</p>
+                    </a>
+                </div>
+                <!-- NUEVO: MENSAJE DE SOPORTE -->
+                <p class="text-center text-gray-500 text-sm mt-8 max-w-sm">
+                    Nuestro equipo de soporte está disponible de Lunes a Viernes y se compromete a responder todas las consultas en un plazo máximo de 24 horas hábiles.
+                </p>
             </main>
         </div>
 
@@ -368,7 +381,35 @@
             </main>
         </div>
 
-        <!-- ===== MENÚ DE NAVEGACIÓN ===== -->
+        <!-- ===== NUEVA SECCIÓN 9: BLOG / CONSEJOS DE SEGURIDAD ===== -->
+        <div id="blog-page" class="page hidden flex-col h-full bg-gray-100 p-6">
+            <header class="flex items-center mb-8">
+                 <button class="back-button mr-4 p-2 rounded-full hover:bg-gray-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <h2 class="text-2xl font-bold text-gray-800">Consejos de Seguridad</h2>
+            </header>
+            <main class="flex-grow overflow-y-auto">
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-bold text-gray-800">Ley "No Molestar": ¿Cómo usar los nuevos prefijos?</h3>
+                        <p class="text-gray-600 mt-2">Desde la implementación de la nueva normativa, las empresas están obligadas a usar prefijos específicos para llamadas de marketing (032), cobranza (033) y encuestas (034). Si recibes una llamada de este tipo sin el prefijo correcto, puedes denunciarla. Nuestro servicio se encarga de gestionar tu inscripción en el registro "No Molestar" para que dejes de recibirlas por completo.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-bold text-gray-800">3 Tipos de Estafas Comunes por WhatsApp y SMS</h3>
+                        <p class="text-gray-600 mt-2"><strong>1. El Falso Familiar:</strong> Un desconocido te escribe haciéndose pasar por un familiar en apuros que necesita dinero urgente. Siempre verifica llamando directamente a tu familiar. <br><strong>2. El Premio Falso:</strong> Recibes un mensaje diciendo que ganaste un premio y te piden hacer clic en un enlace o entregar tus datos. Nunca lo hagas. <br><strong>3. Suplantación del Banco:</strong> Te llega un SMS alertando sobre un supuesto problema con tu cuenta, pidiéndote ingresar a un link. Es falso; los bancos nunca piden datos por SMS.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-bold text-gray-800">¿Qué es el "Phishing" y cómo evitarlo?</h3>
+                        <p class="text-gray-600 mt-2">El phishing es una técnica donde los estafadores se hacen pasar por una entidad legítima (como un banco o una tienda) para robar tu información personal a través de correos o mensajes falsos. La regla de oro es: nunca hagas clic en enlaces sospechosos y siempre verifica que la dirección web sea la oficial antes de ingresar tus datos.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- ===== MENÚ DE NAVEGACIÓN (ACTUALIZADO) ===== -->
         <div id="mobile-menu" class="hidden absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10">
             <div class="absolute top-0 right-0 w-64 h-full bg-gray-800 p-6 shadow-lg">
                 <div class="flex justify-end mb-8">
@@ -378,6 +419,8 @@
                 </div>
                 <nav>
                     <ul class="text-white text-xl space-y-6">
+                        <!-- NUEVO ENLACE AL BLOG -->
+                        <li><a href="#" id="blog-link" class="hover:text-orange-400">Consejos de Seguridad</a></li>
                         <li><a href="#" id="faq-link" class="hover:text-orange-400">Preguntas Frecuentes</a></li>
                         <li><a href="#" id="testimonials-link" class="hover:text-orange-400">Testimonios</a></li>
                         <li><a href="#" id="contact-link" class="hover:text-orange-400">Contacto</a></li>
