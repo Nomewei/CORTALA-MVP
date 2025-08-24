@@ -168,17 +168,18 @@
 
         <!-- ===== SECCIÓN 3: PÁGINA DE PAGO - CON PASOS A SEGUIR ===== -->
         <div id="payment-page" class="page hidden flex-col h-full bg-gray-100 p-6">
-            <header class="flex items-center mb-8">
+            <header class="flex items-center mb-6"> <!-- Margen inferior reducido -->
                  <button id="back-to-form" class="mr-4 p-2 rounded-full hover:bg-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
-                <h2 class="text-2xl font-bold text-gray-800">Realizar Pago Seguro</h2>
+                <!-- Tamaño de texto reducido -->
+                <h2 class="text-xl font-bold text-gray-800">Realizar Pago Seguro</h2>
             </header>
             <main class="flex-grow flex flex-col justify-center items-center">
                 <div class="w-full max-w-md text-center">
-                    <div class="bg-white p-8 rounded-lg shadow-md">
+                    <div class="bg-white p-6 rounded-lg shadow-md"> <!-- Padding reducido -->
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Resumen del Pedido</h3>
                         <div class="text-left my-4">
                             <div class="flex justify-between text-gray-700">
@@ -196,27 +197,27 @@
                             </div>
                         </div>
 
-                        <!-- SECCIÓN NUEVA: PRÓXIMOS PASOS (DISEÑO MEJORADO) -->
-                        <div class="text-left my-6 space-y-6 relative border-l-2 border-blue-200 ml-3">
+                        <!-- SECCIÓN NUEVA: PRÓXIMOS PASOS (DISEÑO MÁS COMPACTO) -->
+                        <div class="text-left my-5 space-y-4 relative border-l-2 border-blue-200 ml-3">
                             <!-- Paso 1 -->
                             <div class="relative pl-8">
                                 <div class="absolute -left-3 top-1 w-5 h-5 bg-blue-500 rounded-full border-4 border-white"></div>
                                 <h4 class="font-bold text-blue-800">Paso 1: Confirma tu Pago</h4>
-                                <p class="text-sm text-gray-600">Serás redirigido a Mercado Pago para completar tu compra de forma segura.</p>
+                                <p class="text-sm text-gray-600">Completa tu compra de forma segura en Mercado Pago.</p>
                             </div>
                     
                             <!-- Paso 2 -->
                             <div class="relative pl-8">
                                 <div class="absolute -left-3 top-1 w-5 h-5 bg-blue-500 rounded-full border-4 border-white"></div>
                                 <h4 class="font-bold text-blue-800">Paso 2: Procesamos tu Solicitud</h4>
-                                <p class="text-sm text-gray-600">Nuestro equipo activará tu servicio dentro de 24 horas hábiles y recibirás un correo de confirmación.</p>
+                                <p class="text-sm text-gray-600">Activaremos tu servicio en 24 hrs hábiles y recibirás un email.</p>
                             </div>
                     
                             <!-- Paso 3 -->
                             <div class="relative pl-8">
                                 <div class="absolute -left-3 top-1 w-5 h-5 bg-blue-500 rounded-full border-4 border-white"></div>
                                 <h4 class="font-bold text-blue-800">Paso 3: ¡Disfruta tu Tranquilidad!</h4>
-                                <p class="text-sm text-gray-600">Comenzarás a notar una drástica reducción del SPAM en los próximos días.</p>
+                                <p class="text-sm text-gray-600">Notarás una drástica reducción del SPAM muy pronto.</p>
                             </div>
                         </div>
                         
