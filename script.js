@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const termsCheckbox = document.getElementById('terms');
     const termsError = document.getElementById('terms-error');
     
+    // Elemento para la nueva sección de Blog/Consejos
+    const blogLink = document.getElementById('blog-link'); 
+
     // Elementos para el Upsell (Protección Extra)
     const addExtraCheckbox = document.getElementById('add-extra');
     const extraFields = document.getElementById('extra-fields');
@@ -46,7 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function sendDataToGoogleSheets(data) {
-        const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec';
+        // URL de Google Apps Script del usuario
+        const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwa3nPrEHSGMtD_52-znhrMF2Yd2eMHlGL-zC82vX41yhltKhkkh6_ifFWaEyLY_2bTbw/exec'; 
         try {
             await fetch(googleSheetsUrl, {
                 method: 'POST',
@@ -61,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- LÓGICA DE MERCADO PAGO ---
-    // IMPORTANTE: Reemplaza 'TU_PUBLIC_KEY' con tu llave pública (empieza con APP-...)
+    // Public Key de Mercado Pago del usuario
     const mp = new MercadoPago('APP_USR-c42e4b7c-df24-4197-a39d-1eff0afed906', { locale: 'es-CL' });
 
     async function initializeMercadoPagoCheckout(amount) {
@@ -92,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function createPaymentPreference(amount) {
         try {
+            // URL del backend en Render del usuario
             const backendUrl = 'https://cortala-mvp-4kgg.onrender.com/create_preference';
             const response = await fetch(backendUrl, {
                 method: 'POST',
@@ -148,10 +153,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (termsLink) termsLink.addEventListener('click', (e) => { e.preventDefault(); showPage('terms-page'); });
     if (termsLinkFromForm) termsLinkFromForm.addEventListener('click', (e) => { e.preventDefault(); showPage('terms-page'); });
 
+    // Event listener para la nueva sección de Blog/Consejos
+    if (blogLink) blogLink.addEventListener('click', (e) => { e.preventDefault(); showPage('blog-page'); });
+
     // Event listener para el checkbox de Protección Extra
     if (addExtraCheckbox) {
         addExtraCheckbox.addEventListener('change', () => {
             extraFields.classList.toggle('hidden', !addExtraCheckbox.checked);
+            updatePriceSummary(); 
         });
     }
 
